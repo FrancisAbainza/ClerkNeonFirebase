@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1754055908847,
+      "tag": "0000_grey_namorita",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1754150982236,
+      "tag": "0001_dry_spacker_dave",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1754549971364,
+      "tag": "0002_natural_the_hand",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1754558747918,
+      "tag": "0003_silky_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1754559187959,
+      "tag": "0004_cloudy_shaman",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1754580964153,
+      "tag": "0005_fuzzy_lethal_legion",
+      "breakpoints": true
+    }
+  ]
+}
