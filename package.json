@@ -1,5 +1,5 @@
 {
-  "name": "drizzle-neon",
+  "name": "clerk-neon-firebase",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,18 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.29.0",
     "@hookform/resolvers": "^5.2.1",
     "@neondatabase/serverless": "^1.0.1",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
-    "add": "^2.0.6",
-    "badge": "^1.0.3",
+    "badge": "^0.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.4",
+    "drizzle-zod": "^0.8.3",
     "firebase-admin": "^13.4.0",
     "lucide-react": "^0.536.0",
     "next": "15.4.5",

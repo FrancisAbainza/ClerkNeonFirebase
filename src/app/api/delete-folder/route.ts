@@ -1,4 +1,4 @@
-import { storage } from '@/lib/firebase';
+import { storage } from '@/lib/firebase-server';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(request: NextRequest) {

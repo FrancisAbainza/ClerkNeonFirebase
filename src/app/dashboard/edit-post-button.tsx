@@ -1,44 +1,44 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import TodoForm from "../components/todo-form";
-import { todoSchema } from "@/lib/validation/todoSchema";
+import PostForm from "../../components/post-form";
+import { postSchema } from "@/lib/validation/postSchema";
 import z from "zod";
-import { updateTodo } from "./actions";
+import { updatePost } from "./actions";
 import { toast } from "sonner";
 import { useRef } from "react";
-import { deleteFilesByUrl, uploadFiles } from "@/lib/firebase-storage-utils";
+import { deleteFilesByPath, uploadFiles } from "@/utils/firebase-storage-utils";
 import { InferInsertModel } from "drizzle-orm";
-import { todos } from "@/db/schema";
+import { posts } from "@/db/schema";
 
 type Props = {
-  defaultValues: Pick<InferInsertModel<typeof todos>, "title" | "description" | "images">;
+  defaultValues: Pick<InferInsertModel<typeof posts>, "title" | "description" | "images">;
   id: number;
 }
 
-export default function EditTodoButton({ defaultValues, id }: Props) {
+export default function EditPostButton({ defaultValues, id }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  const handleSubmit = async (data: z.infer<typeof todoSchema>) => {
+  const handleSubmit = async (data: z.infer<typeof postSchema>) => {
     const { images, ...rest } = data;
 
     try {
-      // Upload files to firebase storage. Returns uploaded file urls
-      const uploadFilesResponse = await uploadFiles(id, 'todos', images);
+      // Upload files to firebase storage. Returns uploaded files paths
+      const uploadFilesResponse = await uploadFiles(id, 'posts', images);
 
-      // Update todo in the database
-      const updatedTodo = {
+      // Update post in the database
+      const updatedPost = {
         ...rest,
-        images: uploadFilesResponse.urls
+        images: uploadFilesResponse.paths
       }
-      await updateTodo(updatedTodo, id);
+      await updatePost(updatedPost, id);
 
       // Delete images from firebase storage
       const imagesToDelete = defaultValues.images.filter(
-        (image) => (!updatedTodo.images.includes(image))
+        (image) => (!updatedPost.images.includes(image))
       );
       if (!!imagesToDelete) {
-        await deleteFilesByUrl(imagesToDelete);
+        await deleteFilesByPath(imagesToDelete);
       }
 
     } catch (error: unknown) {
@@ -46,7 +46,7 @@ export default function EditTodoButton({ defaultValues, id }: Props) {
     }
 
     toast.success("Success!", {
-      description: "Todo updated",
+      description: "Post updated",
     });
     closeRef.current?.click();
   }
@@ -58,12 +58,12 @@ export default function EditTodoButton({ defaultValues, id }: Props) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Todo</DialogTitle>
+          <DialogTitle>Edit Post</DialogTitle>
           <DialogDescription>
-            Edit the fields below to edit the todo.
+            Edit the fields below to edit the post.
           </DialogDescription>
         </DialogHeader>
-        <TodoForm
+        <PostForm
           handleSubmit={handleSubmit}
           defaultValues={defaultValues}
         />
@@ -72,3 +72,5 @@ export default function EditTodoButton({ defaultValues, id }: Props) {
     </Dialog>
   );
 }
+
+

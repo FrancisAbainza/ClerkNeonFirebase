@@ -42,12 +42,12 @@ export function MultiImageUploader({ onImagesChange, images }: Props) {
       </div>
 
       <div>
-        {images.map((url, index) => (
+        {images.map((image, index) => (
           <div key={index} className="flex items-center gap-3 border-1 rounded-md shadow-xs overflow-hidden mt-3 pr-3">
             <div className="relative size-16">
               <Image
-                src={url instanceof File ? URL.createObjectURL(url) : url}
-                alt="todo post image"
+                src={image instanceof File ? URL.createObjectURL(image) : `/api/files/${image}`}
+                alt="post image"
                 fill
                 sizes="100%"
                 className="object-cover"

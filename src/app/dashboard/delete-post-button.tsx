@@ -11,21 +11,21 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button";
-import { deleteTodo } from "./actions";
+import { deletePost } from "./actions";
 import { toast } from "sonner";
-import { deleteFilesByPath } from "@/lib/firebase-storage-utils";
+import { deleteFolder } from "@/utils/firebase-storage-utils";
 
-export default function DeleteTodoButton({ id }: { id: number }) {
+export default function DeletePostButton({ id }: { id: number }) {
   const handleDelete = async () => {
     try {
-      await deleteTodo(id);
-      await deleteFilesByPath(`todos/${id}/`);
+      await deletePost(id);
+      await deleteFolder(`posts/${id}/`);
     } catch (error: unknown) {
       toast.error((error as Error).message);
     }
 
     toast.success("Success!", {
-      description: "Todo deleted",
+      description: "Post deleted",
     });
   }
   return (
@@ -37,7 +37,7 @@ export default function DeleteTodoButton({ id }: { id: number }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete this todo
+            This action cannot be undone. This will permanently delete this post
             and remove all its data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -49,3 +49,5 @@ export default function DeleteTodoButton({ id }: { id: number }) {
     </AlertDialog>
   );
 }
+
+

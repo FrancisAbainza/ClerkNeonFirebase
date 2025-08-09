@@ -1,11 +1,11 @@
 {
-  "id": "8affb09e-c91e-45a2-9866-472e75bac32e",
+  "id": "943fb533-c640-4c2f-af53-5834ccf90f5e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.todos": {
-      "name": "todos",
+    "public.posts": {
+      "name": "posts",
       "schema": "",
       "columns": {
         "id": {
@@ -15,7 +15,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "todos_id_seq",
+            "name": "posts_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -35,14 +35,13 @@
           "name": "description",
           "type": "varchar(1024)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "is_completed": {
-          "name": "is_completed",
-          "type": "boolean",
+        "images": {
+          "name": "images",
+          "type": "text[]",
           "primaryKey": false,
-          "notNull": true,
-          "default": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",

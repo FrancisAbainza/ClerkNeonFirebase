@@ -1,6 +1,6 @@
 import { FileUpload } from "@/types/files";
 
-// Function for uploadingfiles to storage. Accepts an array of string urls or file.
+// Function for uploadingfiles to storage. Accepts an array of string paths or file.
 export const uploadFiles = async (id: number, folderName: string, files: FileUpload[]) => {
   // Create form data object
   const formData = new FormData();
@@ -14,7 +14,7 @@ export const uploadFiles = async (id: number, folderName: string, files: FileUpl
     formData.append('files', file);
   })
 
-  // Fetch the upload route then send form data. Returns uploaded files URL.
+  // Fetch the upload route then send form data. Returns uploaded files path.
   const uploadResponse = await fetch('/api/upload', {
     method: 'POST',
     body: formData,
@@ -26,14 +26,14 @@ export const uploadFiles = async (id: number, folderName: string, files: FileUpl
     throw new Error(response.error || "Upload failed");
   }
 
-  return { urls: await uploadResponse.json() as string[] };
+  return { paths: await uploadResponse.json() as string[] };
 }
 
-export const deleteFilesByUrl = async (urls: string[]) => {
+export const deleteFilesByPath = async (paths: string[]) => {
   const formData = new FormData();
 
-  urls.forEach((url) => {
-    formData.append('urls', url)
+  paths.forEach((path) => {
+    formData.append('paths', path)
   })
 
   const deleteResponse = await fetch('/api/delete', {
@@ -41,14 +41,14 @@ export const deleteFilesByUrl = async (urls: string[]) => {
     body: formData,
   })
 
-  // If the status code is not with 200 - 299, retrun an error object
+  // If the status code is not with 200 - 299, return an error object
   if (!deleteResponse.ok) {
     const response = await deleteResponse.json();
     throw new Error(response.error || "Delete failed");
   }
 }
 
-export const deleteFilesByPath = async (path: string) => {
+export const deleteFolder = async (path: string) => {
   const deleteResponse = await fetch('/api/delete-folder', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },

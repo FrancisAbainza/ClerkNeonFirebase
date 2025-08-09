@@ -1,29 +1,28 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { todoSchema } from "@/lib/validation/todoSchema";
+import { postSchema } from "@/lib/validation/postSchema";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { MultiImageUploader } from "./multi-image-uploader";
 
 type Props = {
-  handleSubmit: (data: z.infer<typeof todoSchema>) => void,
-  defaultValues?: z.infer<typeof todoSchema>,
+  handleSubmit: (data: z.infer<typeof postSchema>) => void,
+  defaultValues?: z.infer<typeof postSchema>,
 }
 
-export default function TodoForm({ handleSubmit, defaultValues }: Props) {
-  const combinedDefaultValues: z.infer<typeof todoSchema> = {
+export default function PostForm({ handleSubmit, defaultValues }: Props) {
+  const combinedDefaultValues: z.infer<typeof postSchema> = {
     title: "",
     description: "",
     images: [],
     ...defaultValues
   }
 
-  const form = useForm<z.infer<typeof todoSchema>>({
-    resolver: zodResolver(todoSchema),
+  const form = useForm<z.infer<typeof postSchema>>({
+    resolver: zodResolver(postSchema),
     defaultValues: combinedDefaultValues,
   })
 
@@ -77,3 +76,5 @@ export default function TodoForm({ handleSubmit, defaultValues }: Props) {
     </Form>
   );
 }
+
+

@@ -1,16 +1,14 @@
-import { storage } from '@/lib/firebase';
-import { extractStoragePath } from '@/lib/urlFormatter';
+import { storage } from '@/lib/firebase-server';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(request: NextRequest) {
   try {
     const formData = await request.formData();
-    const urls = formData.getAll('urls') as string[];
+    const paths = formData.getAll('paths') as string[];
     const bucket = storage.bucket();
 
     // Delete all files
-    const deletePromises = urls.map((url) => {
-      const path = extractStoragePath(url);
+    const deletePromises = paths.map((path) => {
       return bucket.file(path).delete()}
     );
     await Promise.all(deletePromises);

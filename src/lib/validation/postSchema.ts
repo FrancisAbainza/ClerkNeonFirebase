@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { createInsertSchema } from 'drizzle-zod';
+import { posts } from '@/db/schema';
 
-export const todoDataSchema = z.object({
+export const postDataSchema = z.object({
   title: z.string().min(1, {
     message: "Title must contain a value.",
   }),
@@ -9,8 +11,12 @@ export const todoDataSchema = z.object({
   }),
 })
 
-export const todoImagesSchema = z.object({
+export const postImagesSchema = z.object({
   images: z.array(z.union([z.string(), z.instanceof(File)])).min(1, "A minimum of one image is required"),
 });
 
-export const todoSchema = todoDataSchema.and(todoImagesSchema);
+export const postSchema = postDataSchema.and(postImagesSchema);
+
+export const postInsertSchema = createInsertSchema(posts);
+
+

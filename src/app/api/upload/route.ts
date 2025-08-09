@@ -1,5 +1,4 @@
-import { storage } from "@/lib/firebase";
-import { pathToFirebaseURL } from "@/lib/urlFormatter";
+import { storage } from "@/lib/firebase-server";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -11,11 +10,10 @@ export const POST = async (request: NextRequest) => {
 
     const bucket = storage.bucket();
 
-    const uploadedImagesUrl: string[] = await Promise.all(
+    const uploadedImagesPaths: string[] = await Promise.all(
       files.map(async (file, index) => {
         if (file instanceof File) {
           const path = `${folderName}/${id}/${Date.now()}-${index}-${file.name}`;
-          const url = pathToFirebaseURL(path);
           const arrayBuffer = await file.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
           const fileRef = bucket.file(path);
@@ -26,14 +24,14 @@ export const POST = async (request: NextRequest) => {
             },
           });
 
-          return url;
+          return path;
         } else {
           return file;
         }
       })
     );
 
-    return NextResponse.json(uploadedImagesUrl);
+    return NextResponse.json(uploadedImagesPaths);
   } catch (error: unknown) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to upload files' },
