@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RedirectOnSignedIn } from "@/components/redirect-on-signed-in";
 
 export const dynamic = 'force-dynamic'
 
@@ -23,6 +24,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
+      <RedirectOnSignedIn to="/dashboard" />
       <section className="container mx-auto px-4 py-16 md:py-24 text-center">
         <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
@@ -34,10 +36,10 @@ export default async function Home() {
             A modern starter with Clerk auth, Neon + Drizzle, and Firebase Storage — styled with shadcn/ui.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
-            <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+            <SignUpButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
               <Button size="lg">Get started</Button>
             </SignUpButton>
-            <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+            <SignInButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
               <Button variant="outline" size="lg">Sign in</Button>
             </SignInButton>
           </div>

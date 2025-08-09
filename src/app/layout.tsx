@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -55,10 +55,10 @@ export default function RootLayout({
                 <div className="flex items-center gap-2">
                   <SignedOut>
                     <div className="flex items-center gap-2">
-                      <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+                      <SignInButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
                         <Button variant="outline" size="sm">Sign In</Button>
                       </SignInButton>
-                      <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+                      <SignUpButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
                         <Button size="sm">Sign Up</Button>
                       </SignUpButton>
                     </div>
