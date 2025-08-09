@@ -32,10 +32,10 @@ export default async function Home() {
             A modern starter with Clerk auth, Neon + Drizzle, and Firebase Storage — styled with shadcn/ui.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
-            <SignUpButton mode="modal">
+            <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
               <Button size="lg">Get started</Button>
             </SignUpButton>
-            <SignInButton mode="modal">
+            <SignInButton mode="modal" forceRedirectUrl="/dashboard">
               <Button variant="outline" size="lg">Sign in</Button>
             </SignInButton>
           </div>

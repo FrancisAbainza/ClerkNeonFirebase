@@ -55,10 +55,10 @@ export default function RootLayout({
                 <div className="flex items-center gap-2">
                   <SignedOut>
                     <div className="flex items-center gap-2">
-                      <SignInButton mode="modal">
+                      <SignInButton mode="modal" forceRedirectUrl="/dashboard">
                         <Button variant="outline" size="sm">Sign In</Button>
                       </SignInButton>
-                      <SignUpButton mode="modal">
+                      <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
                         <Button size="sm">Sign Up</Button>
                       </SignUpButton>
                     </div>
