@@ -2,16 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { HeaderAuth } from "@/components/header-auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,21 +46,7 @@ export default function RootLayout({
                   </span>
                 </Link>
 
-                <div className="flex items-center gap-2">
-                  <SignedOut>
-                    <div className="flex items-center gap-2">
-                      <SignInButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
-                        <Button variant="outline" size="sm">Sign In</Button>
-                      </SignInButton>
-                      <SignUpButton mode="modal" forceRedirectUrl="/dashboard" fallbackRedirectUrl="/dashboard">
-                        <Button size="sm">Sign Up</Button>
-                      </SignUpButton>
-                    </div>
-                  </SignedOut>
-                  <SignedIn>
-                    <UserButton />
-                  </SignedIn>
-                </div>
+                <HeaderAuth />
               </div>
             </div>
           </header>
