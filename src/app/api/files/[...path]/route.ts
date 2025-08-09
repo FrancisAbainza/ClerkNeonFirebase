@@ -2,8 +2,11 @@
 import { NextResponse } from "next/server";
 import { storage } from "@/lib/firebase-server"; // make sure your Firebase admin is initialized here
 
-export async function GET(req: Request, context: { params: { path: string[] } }) {
-  const { path } = await context.params;
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ path: string[] }> }
+) {
+  const { path } = await params;
 
   const filePath = path.join("/"); // "posts/1/image.jpeg"
   const bucket = storage.bucket();
